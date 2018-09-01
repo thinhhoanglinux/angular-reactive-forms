@@ -1,0 +1,10 @@
+<div class="container">
+    <nav>
+        <a routerLink="home" routerLinkActive="active">Home</a> |
+        <a routerLink="product" routerLinkActive="active">Product</a> |
+        <a routerLink="employee" routerLinkActive="active">Employee</a> |
+        <a routerLink="invoice" routerLinkActive="active">Invoice</a>
+      </nav>
+      <input class="btn btn-primary btn-sm" type="button" value="Hello" (click)="navigateToInvoice($event)"/>
+      <router-outlet></router-outlet>
+</div>

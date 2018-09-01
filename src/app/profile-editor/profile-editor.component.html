@@ -1,0 +1,73 @@
+<form [formGroup]="profileForm">
+  <div>Form status: {{profileForm?.status}}</div>
+  <label>
+    First Name:
+    <input type="text" formControlName="firstName" />
+    <div class="alert alert-danger" [hidden]="profileForm?.controls?.firstName?.valid || profileForm?.controls?.firstName?.pristine">
+      First Name is required
+    </div>
+  </label>
+
+  <label>
+    Last Name:
+    <input type="text" formControlName="lastName" />
+  </label>
+
+  <div formGroupName="address">
+    <label>
+      Street:
+      <input type="text" formControlName="street" />
+    </label>
+
+    <label>
+      City:
+      <input type="text" formControlName="city" />
+    </label>
+
+    <label>
+      State:
+      <input type="text" formControlName="state" />
+    </label>
+
+    <label>
+      Zip:
+      <input type="text" formControlName="zip" />
+    </label>
+  </div>
+
+  <div formArrayName="aliases">
+    <h3>Aliases</h3> <button (click)="addAliases()">Add Aliases</button>
+
+    <div *ngFor="let address of aliases?.controls; let i = index" [formGroupName]="i">
+
+      <div>
+        <label>
+          Name:
+          <input type="text" formControlName="name" />
+          <div class="alert alert-danger" [hidden]="profileForm?.controls?.aliases?.controls[i]?.controls?.name?.valid || profileForm?.controls?.aliases?.controls[i]?.controls?.name?.pristine">
+            First Name is required
+          </div>
+        </label>
+
+        <label>
+          Age:
+          <input type="text" formControlName="age" />
+          <div class="alert alert-danger" [hidden]="profileForm?.controls?.aliases?.controls[i]?.controls?.age?.valid || profileForm?.controls?.aliases?.controls[i]?.controls?.age?.pristine">
+            Age is required
+          </div>
+        </label>
+
+        <label>
+          Gender:
+          <input type="text" formControlName="gender" />
+        </label>
+
+        <input type="button" value="Delete" (click)="removeAliases(i)">
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" (click)="onSubmit()" [disabled]="!profileForm?.valid">Submit</button>
+  <button (click)="updateProfile()">Update Profile</button>
+  <button type="button" (click)="profileForm.reset()">Reset</button>
+</form>
