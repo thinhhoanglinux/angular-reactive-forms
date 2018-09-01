@@ -12,8 +12,4 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  navigateToInvoice(event?: Event): void {
-    this.router.navigate(['invoice']);
-  }
 }

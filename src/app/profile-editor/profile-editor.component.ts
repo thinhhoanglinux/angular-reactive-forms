@@ -1,5 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { IDropdownSettings } from '../ng-multiselect-dropdown/src';
+import { DropDownItems } from '../models/drop-down-items.model';
 
 @Component({
   selector: 'app-profile-editor',
@@ -7,9 +9,16 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
   styleUrls: ['./profile-editor.component.scss']
 })
 export class ProfileEditorComponent implements OnInit {
+  @Output('submit') submit = new EventEmitter<any>();
+  cities: DropDownItems[] = [];
+  selectedItems: DropDownItems[] = [];
+  dropdownSettings: IDropdownSettings = {};
+  showFilter = true;
+  showAll = true;
+  limitSelection = false;
   profileForm = this.fb.group({
     firstName: ['', Validators.required],
-    lastName: [''],
+    lastName: ['', Validators.required],
     address: this.fb.group({
       street: [''],
       city: [''],
@@ -17,35 +26,42 @@ export class ProfileEditorComponent implements OnInit {
       zip: ['']
     }),
     aliases: this.fb.array([
-    ])
+    ]),
+    multiCity: [this.selectedItems]
   });
 
   object = {
-    firstName: 'A',
-    lastName: 'Nguyen',
+    firstName: '',
+    lastName: '',
     address: {
-      street: 'Nguyen Van B',
-      city: 'Ho Chi Minh',
-      state: 'Ho Chi Minh',
-      zip: '70000'
+      street: '',
+      city: '',
+      state: '',
+      zip: ''
     },
-    aliases: [{
-      name: 'A',
-      age: '19',
-      gender: 'Male'
-    }, {
-      name: 'B',
-      age: '20',
-      gender: 'Female'
-    }]
+    aliases: []
   };
-
-  @Output('submit') submit = new EventEmitter<any>();
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.object.aliases.forEach(_ => this.addAliases());
     this.profileForm.patchValue(this.object);
+    this.cities = [
+      { id: 1, text: 'New Delhi' },
+      { id: 2, text: 'Mumbai' },
+      { id: 3, text: 'Bangalore' },
+      { id: 4, text: 'Pune' },
+      { id: 5, text: 'Chennai' },
+      { id: 6, text: 'Navsari' }
+    ];
+    this.selectedItems = [];
+    this.dropdownSettings = {
+      singleSelection: false,
+      selectAll: 'Select All',
+      unselectAll: 'UnSelect All',
+      allowSearchFilter: this.showFilter
+    };
+    this.profileForm.get('multiCity').patchValue(this.selectedItems);
   }
 
   initAliases() {
@@ -57,7 +73,7 @@ export class ProfileEditorComponent implements OnInit {
   }
 
   onSubmit() {
-    console.error(`profile-editor component: ${this.profileForm.value}`);
+    console.log('profile-editor component', this.profileForm.value);
     this.submit.emit(this.profileForm);
   }
 

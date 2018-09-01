@@ -11,6 +11,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { CommonModule } from '@angular/common';
 import { NameEditorComponent } from './name-editor/name-editor.component';
 import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
+import { NgMultiSelectDropDownModule } from './ng-multiselect-dropdown/src';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,11 @@ import { ProfileEditorComponent } from './profile-editor/profile-editor.componen
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

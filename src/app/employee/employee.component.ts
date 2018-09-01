@@ -13,11 +13,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   onSubmit(object) {
-    console.warn(object);
-  }
-
-  onSubmit2(object) {
-    console.warn(object);
+    console.log('employee component', object);
   }
 
 }
