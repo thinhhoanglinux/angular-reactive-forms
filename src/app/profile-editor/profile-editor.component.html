@@ -57,8 +57,15 @@
   </div>
 
   <div style="margin-top: 16px">
+    <label>Multi Select</label>
     <app-multiselect-dropdown name="multiCity" [placeholder]="'Select City'" [data]="cities" formControlName="multiCity" [disabled]="disabled"
       [settings]="dropdownSettings"></app-multiselect-dropdown>
+  </div>
+
+  <div style="margin-top: 16px">
+    <label>Timezone</label>
+    <app-timezone-picker formControlName="multiTimezone" [timezone]="timezone" (change)="changeTimezone($event)" placeholder=" Select timezone ">
+    </app-timezone-picker>
   </div>
 
   <div style="margin-top: 16px" class="text-right">

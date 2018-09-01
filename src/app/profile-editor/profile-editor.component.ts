@@ -10,12 +10,10 @@ import { DropDownItems } from '../models/drop-down-items.model';
 })
 export class ProfileEditorComponent implements OnInit {
   @Output('submit') submit = new EventEmitter<any>();
+  timezone = '';
   cities: DropDownItems[] = [];
   selectedItems: DropDownItems[] = [];
   dropdownSettings: IDropdownSettings = {};
-  showFilter = true;
-  showAll = true;
-  limitSelection = false;
   profileForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -27,7 +25,8 @@ export class ProfileEditorComponent implements OnInit {
     }),
     aliases: this.fb.array([
     ]),
-    multiCity: [this.selectedItems]
+    multiCity: [this.selectedItems],
+    multiTimezone: ['']
   });
 
   object = {
@@ -59,7 +58,7 @@ export class ProfileEditorComponent implements OnInit {
       singleSelection: false,
       selectAll: 'Select All',
       unselectAll: 'UnSelect All',
-      allowSearchFilter: this.showFilter
+      allowSearchFilter: true
     };
     this.profileForm.get('multiCity').patchValue(this.selectedItems);
   }
@@ -93,6 +92,10 @@ export class ProfileEditorComponent implements OnInit {
   removeAliases(i: number) {
     console.error(this.aliases);
     this.aliases.removeAt(i);
+  }
+
+  changeTimezone(event: string) {
+    this.timezone = event;
   }
 
 }

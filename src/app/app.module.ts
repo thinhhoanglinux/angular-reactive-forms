@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { NameEditorComponent } from './name-editor/name-editor.component';
 import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
 import { NgMultiSelectDropDownModule } from './ng-multiselect-dropdown/src';
+import { TimezonePickerModule } from './ng-timezone-selector/timezone-picker.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NgMultiSelectDropDownModule } from './ng-multiselect-dropdown/src';
     CommonModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    TimezonePickerModule
   ],
   providers: [
   ],
