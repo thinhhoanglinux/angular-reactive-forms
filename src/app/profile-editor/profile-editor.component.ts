@@ -25,8 +25,8 @@ export class ProfileEditorComponent implements OnInit {
     }),
     aliases: this.fb.array([
     ]),
-    multiCity: [this.selectedItems],
-    multiTimezone: ['']
+    multiCity: [this.selectedItems, Validators.required],
+    multiTimezone: ['', Validators.required]
   });
 
   object = {
