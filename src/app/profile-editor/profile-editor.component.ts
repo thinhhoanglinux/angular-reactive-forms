@@ -72,7 +72,6 @@ export class ProfileEditorComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('profile-editor component', this.profileForm.value);
     this.submit.emit(this.profileForm);
   }
 
@@ -90,7 +89,6 @@ export class ProfileEditorComponent implements OnInit {
   }
 
   removeAliases(i: number) {
-    console.error(this.aliases);
     this.aliases.removeAt(i);
   }
 
