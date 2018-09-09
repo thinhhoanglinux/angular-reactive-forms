@@ -23,7 +23,7 @@ export const TIMEZONE_PICKER_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'app-timezone-picker',
   template: `
-  <select #select id="select" style="width: 100%" class="form-control" [disabled]="disabled">
+  <select #select id="select" style="width: 100%" class="form-control" [disabled]="disabled" (clickOutside)="closeDropdown()">
     <option></option>
     <ng-template let-c ngFor [ngForOf]="allTimezones">
       <optgroup *ngIf="c.zones.length > 1" [label]="c.iso | iso2CountryPipe">
@@ -263,4 +263,6 @@ export class TimezonePickerComponent implements AfterViewInit, ControlValueAcces
       return string;
     }
   }
+
+  closeDropdown() {}
 }
